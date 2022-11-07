@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid'
 import { useState, useEffect } from 'react'
 import Question from './Question'
+import { QuizContainer, GameButton } from './Styles'
 
 
 export default function Quiz() {
-
     const [questionsData, setQuestionsData] = useState([])
     const [answerState, setAnswerState] = useState({
         options: [
@@ -17,7 +17,7 @@ export default function Quiz() {
     });
     const [score, setScore] = useState(0)
 
-    useEffect(() => {
+    function getQuestions() {
         fetch('https://opentdb.com/api.php?amount=5&type=multiple')
             .then(res => res.json())
             .then(data => {
@@ -28,7 +28,12 @@ export default function Quiz() {
                 })
                 setQuestionsData(newData)
             })
+    }
+
+    useEffect(() => {
+        getQuestions()
     }, [])
+
 
     function displayQuestions(arr) {
         const questions = arr.map((question, index) => {
@@ -38,19 +43,22 @@ export default function Quiz() {
                 question={question.question}
                 correctAnswer={question.correct_answer}
                 answerState={answerState}
+                answers={question.answers}
             />
         })
         return questions
     }
 
     return (
-        <div>
+        <QuizContainer>
             <form>
                 {displayQuestions(questionsData)}
-                <button>
-                    Check Answers
-                </button>
+                <div className="button-container">
+                    <GameButton>
+                        Check Answers
+                    </GameButton>
+                </div>
             </form>
-        </div>
+        </QuizContainer>
     )
 }

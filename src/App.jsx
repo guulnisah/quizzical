@@ -1,5 +1,6 @@
 import React from 'react'
 import Quiz from './components/Quiz'
+import { Container, StartButton } from './components/Styles'
 
 export default function App() {
 
@@ -10,7 +11,7 @@ export default function App() {
   }
 
   return (
-    <div>
+    <Container>
       {
         gameStarted ?
           <Quiz />
@@ -18,10 +19,10 @@ export default function App() {
           <div className="intro-screen">
             <h1> Quizzical </h1 >
             <p>Test yourself!</p>
-            <button className="start-button button" onClick={startGame}>Start Quiz</button>
+            <StartButton className="start-button button" onClick={startGame}>Start Quiz</StartButton>
           </div >
       }
 
-    </div>
+    </Container>
   )
 }
