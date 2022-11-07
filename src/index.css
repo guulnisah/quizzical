@@ -1,0 +1,40 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+body {
+  background-color: #F5F7FB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(./assets/yellow-blob.svg), url(./assets/blue-blob.svg);
+  background-repeat: no-repeat, no-repeat;
+  background-position: right -100px top -100px, left -100px bottom -100px;
+}
