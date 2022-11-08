@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Question from './Question'
 import { QuizContainer, GameButton } from './Styles'
 
-export default function Quiz() {
+export default function Quiz({ categoryNumber }) {
     const [checked, setChecked] = useState(false)
     const [questionsData, setQuestionsData] = useState([])
     const [answerState, setAnswerState] = useState({
@@ -18,7 +18,7 @@ export default function Quiz() {
     const [score, setScore] = useState(0)
 
     function getQuestions() {
-        fetch('https://opentdb.com/api.php?amount=5&type=multiple')
+        fetch(`https://opentdb.com/api.php?amount=5&type=multiple&category=${categoryNumber}`)
             .then(res => res.json())
             .then(data => {
                 const newData = data.results.map((elem) => {
@@ -39,7 +39,7 @@ export default function Quiz() {
         getQuestions()
     }
 
-    function handleChange(e, questionID, answerID) {
+    function handleChange(e, questionID) {
         e.preventDefault()
         const { textContent } = e.target;
         setAnswerState((prevState) => {

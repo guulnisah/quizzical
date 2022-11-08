@@ -20,7 +20,13 @@ export const Container = styled.main`
     font-family: 'Inter';
     font-size: 16px;
     line-height: 19px;
-    margin-bottom: 30px;
+    }
+    
+    .relative {
+      position:relative;
+      height: 30px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
     }
   }
 `
@@ -29,7 +35,7 @@ export const Button = styled.button`
   background-color: #4D5B9E;
   border: none;
   border-radius: 10px;
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
@@ -38,8 +44,8 @@ export const Button = styled.button`
 `
 
 export const StartButton = styled(Button)`
-  width: 193px;
-  height: 52px;
+  width: 200px;
+  height: 55px;
 `
 
 export const QuizContainer = styled.section`
@@ -90,6 +96,7 @@ export const GameButton = styled(Button)`
 `
 export const Answers = styled.div`
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 15px;
     gap: 15px;
     
