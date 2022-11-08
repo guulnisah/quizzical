@@ -75,6 +75,10 @@ export const QuizContainer = styled.section`
         color: #293264;
       }
     }
+    
+    @media screen and (max-width: 600px){
+    padding: 1rem;
+    }
 `
 
 export const GameButton = styled(Button)`
@@ -88,6 +92,10 @@ export const Answers = styled.div`
     display: flex;
     margin-bottom: 15px;
     gap: 15px;
+    
+    @media screen and (max-width: 600px){
+      gap: 10px;
+    }
 `
 
 export const AnswerButton = styled.button`
@@ -99,4 +107,30 @@ export const AnswerButton = styled.button`
     font-size: 10px;
     line-height: 12px;
     color: #293264;
+    background-color: ${({ selected, disabled, correct, incorrect }) => {
+    if (disabled && correct) { return "#94D7A2" }
+    else if (disabled && incorrect && selected) { return "#F8BCBC" }
+    else if (selected) { return "#D6DBF5" }
+    else { return "transparent" }
+  }};
+    border: ${({ selected }) => {
+    return selected ? "none" : "1px solid #4D5B9E"
+  }};
+    
+    &:disabled {
+      opacity: ${({ correct }) => {
+    return correct ? "1" : "0.5"
+  }};
+      border: ${({ selected, correct, incorrect }) => {
+    if (!selected && incorrect) { return "1px solid #4D5B9E" }
+    else if (correct) { return "none" }
+    else if (incorrect) { return "none" }
+    else if (selected) { return "none" }
+  }};;
+      border-radius: 8px;
+    }
+    
+    @media screen and (max-width: 600px){
+      padding: 5px;
+    }
 `
