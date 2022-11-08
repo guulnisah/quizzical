@@ -1,4 +1,5 @@
 import { Answers, AnswerButton } from './Styles'
+import { decode } from 'html-entities'
 
 export default function Question(props) {
     const answers = props.answers.map((answer, index) => {
@@ -10,13 +11,13 @@ export default function Question(props) {
                 selected={props.answerState.options[props.id].selected === answer}
                 correct={answer === props.correctAnswer}
                 incorrect={answer !== props.correctAnswer}
-            >{answer}</AnswerButton>
+            >{decode(answer)}</AnswerButton>
         )
     })
 
     return (
         <article>
-            <h2>{props.question}</h2>
+            <h2>{decode(props.question)}</h2>
             <Answers className="quiz-answers">{answers}</Answers>
             <hr />
         </article>
