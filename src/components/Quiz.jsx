@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react'
 import Question from './Question'
 import { QuizContainer, GameButton } from './Styles'
 
-
 export default function Quiz() {
+    const [checked, setChecked] = useState(false)
     const [questionsData, setQuestionsData] = useState([])
     const [answerState, setAnswerState] = useState({
         options: [
@@ -34,16 +34,47 @@ export default function Quiz() {
         getQuestions()
     }, [])
 
+    function newGame() {
+        setChecked(false)
+        getQuestions()
+    }
+
+    function handleChange(e, questionID, answerID) {
+        e.preventDefault()
+        const { textContent } = e.target;
+        setAnswerState((prevState) => {
+            return {
+                ...prevState,
+                options: prevState.options.map((opt) => {
+                    if (opt.questNum === questionID) {
+                        return { ...opt, selected: textContent };
+                    } else {
+                        return { ...opt };
+                    }
+                })
+            };
+        });
+    };
+
+    function submitAnswers() {
+        setChecked(true)
+        const answers = questionsData.map((elem, index) => {
+            return elem.correct_answer === answerState.options[index].selected
+        })
+        setScore(answers.filter(Boolean).length)
+    };
 
     function displayQuestions(arr) {
         const questions = arr.map((question, index) => {
             return <Question
+                checked={checked}
                 key={nanoid()}
                 id={index}
                 question={question.question}
                 correctAnswer={question.correct_answer}
-                answerState={answerState}
                 answers={question.answers}
+                handleChange={handleChange}
+                answerState={answerState}
             />
         })
         return questions
@@ -53,11 +84,20 @@ export default function Quiz() {
         <QuizContainer>
             <form>
                 {displayQuestions(questionsData)}
-                <div className="button-container">
-                    <GameButton>
-                        Check Answers
-                    </GameButton>
-                </div>
+                {
+                    <div className="button-container">
+                        {checked ? <>
+                            <span>You scored {score} / 5 correct answers</span>
+                            <GameButton onClick={newGame}>
+                                Play Again
+                            </GameButton>
+                        </>
+                            :
+                            <GameButton onClick={submitAnswers}>
+                                Check Answers
+                            </GameButton>}
+                    </div>
+                }
             </form>
         </QuizContainer>
     )
