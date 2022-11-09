@@ -32,17 +32,12 @@ const DropDownList = styled.ul`
     width: 100%;
     background: #FFFFFF;
     
-    /* width */
     ::-webkit-scrollbar {
     width: 1rem;
     }
-
-    /* Track */
     ::-webkit-scrollbar-track {
     background: #FFFFFF;
     }
-
-    /* Handle */
     ::-webkit-scrollbar-thumb {
     background: #faf09e;
     }
