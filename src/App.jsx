@@ -5,7 +5,7 @@ import Selector from './components/Selector'
 export default function App() {
 
   const [gameStarted, setGameStarted] = useState(false)
-  const [categoryNumber, setCategoryNumber] = useState(null)
+  const [categoryNumber, setCategoryNumber] = useState(0)
 
   function startGame() {
     setGameStarted(prevState => !prevState)
@@ -15,7 +15,7 @@ export default function App() {
     <Container>
       {
         gameStarted ?
-          <Quiz categoryNumber={categoryNumber} />
+          <Quiz categoryNumber={categoryNumber} setGameStarted={setGameStarted} />
           :
           <div className="intro-screen">
             <h1> Quizzical </h1 >
