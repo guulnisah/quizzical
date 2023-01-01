@@ -8,7 +8,7 @@ export default function Question(props) {
                 key={index}
                 onClick={(e) => props.handleChange(e, props.id, index)}
                 disabled={props.checked}
-                selected={props.answerState.options[props.id].selected === answer}
+                selected={props.answerState.options[props.id].selected === decode(answer)}
                 correct={answer === props.correctAnswer}
                 incorrect={answer !== props.correctAnswer}
             >{decode(answer)}</AnswerButton>
